@@ -291,35 +291,67 @@
     </div>
 
     <script>
+      <div class="crypto-box">
+        <p><strong>Bitcoin (BTC)</strong></p>
+        <div>
+          <span id="btc-address">bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv</span>
+          <button onclick="copyAddress('btc-address')">Copy</button>
+        </div>
+        <p>Balance: <span id="btc-balance">Loading...</span></p>
+      </div>
+
+      <div class="crypto-box">
+        <p><strong>Ethereum (ETH)</strong></p>
+        <div>
+          <span id="eth-address">0x8b3420e91309B845465f131CF4332235c24deAD2</span>
+          <button onclick="copyAddress('eth-address')">Copy</button>
+        </div>
+        <p>Balance: <span id="eth-balance">Loading...</span></p>
+      </div>
+
+      <div class="crypto-box">
+        <p><strong>Litecoin (LTC)</strong></p>
+        <div>
+          <span id="ltc-address">LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp</span>
+          <button onclick="copyAddress('ltc-address')">Copy</button>
+        </div>
+        <p>Balance: <span id="ltc-balance">Loading...</span></p>
+      </div>
+    </div>
+
+    <script>
       async function fetchCryptoBalances() {
-        // Bitcoin Balance
+        // Bitcoin Balance (using Blockchair API)
         const btcAddress = "bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv";
         try {
-          const btcResponse = await fetch(`https://blockchain.info/q/addressbalance/${btcAddress}?confirmations=6`);
-          const btcBalance = (await btcResponse.text()) / 1e8; // Convert Satoshi to BTC
+          const btcResponse = await fetch(`https://api.blockchair.com/bitcoin/dashboards/address/${btcAddress}`);
+          const btcData = await btcResponse.json();
+          const btcBalance = btcData.data[btcAddress].address.balance / 1e8; // Convert satoshis to BTC
           document.getElementById("btc-balance").innerText = `${btcBalance} BTC`;
         } catch (error) {
           console.error("Error fetching Bitcoin balance:", error);
           document.getElementById("btc-balance").innerText = "Error fetching balance";
         }
 
-        // Ethereum Balance
+        // Ethereum Balance (using Etherscan API)
         const ethAddress = "0x8b3420e91309B845465f131CF4332235c24deAD2";
         try {
-          const ethResponse = await fetch(`https://api.blockcypher.com/v1/eth/main/addrs/${ethAddress}/balance`);
+          const ethResponse = await fetch(`https://api.etherscan.io/api?module=account&action=balance&address=${ethAddress}&tag=latest`);
           const ethData = await ethResponse.json();
-          document.getElementById("eth-balance").innerText = `${ethData.balance / 1e18} ETH`;
+          const ethBalance = ethData.result / 1e18; // Convert wei to ETH
+          document.getElementById("eth-balance").innerText = `${ethBalance} ETH`;
         } catch (error) {
           console.error("Error fetching Ethereum balance:", error);
           document.getElementById("eth-balance").innerText = "Error fetching balance";
         }
 
-        // Litecoin Balance
+        // Litecoin Balance (using Blockchair API)
         const ltcAddress = "LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp";
         try {
-          const ltcResponse = await fetch(`https://api.blockcypher.com/v1/ltc/main/addrs/${ltcAddress}/balance`);
+          const ltcResponse = await fetch(`https://api.blockchair.com/litecoin/dashboards/address/${ltcAddress}`);
           const ltcData = await ltcResponse.json();
-          document.getElementById("ltc-balance").innerText = `${ltcData.balance / 1e8} LTC`;
+          const ltcBalance = ltcData.data[ltcAddress].address.balance / 1e8; // Convert litoshis to LTC
+          document.getElementById("ltc-balance").innerText = `${ltcBalance} LTC`;
         } catch (error) {
           console.error("Error fetching Litecoin balance:", error);
           document.getElementById("ltc-balance").innerText = "Error fetching balance";
