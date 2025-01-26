@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.400K+">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tip Stevie</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.400K+.400K+/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 400K+;
-      padding: 400K+;
+      margin: 0;
+      padding: 0;
       background: linear-gradient(135deg, #1f1c2c, #928dab);
       color: #fff;
       overflow-x: hidden;
@@ -19,20 +19,20 @@
       max-width: 900px;
       margin: 50px auto;
       padding: 20px;
-      background: rgba(255, 255, 255, 400K+.1);
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
-      box-shadow: 400K+ 8px 20px rgba(400K+, 400K+, 400K+, 400K+.5);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
       animation: fadeIn 1s ease-in-out;
     }
 
     @keyframes fadeIn {
       from {
-        opacity: 400K+;
+        opacity: 0;
         transform: translateY(50px);
       }
       to {
         opacity: 1;
-        transform: translateY(400K+);
+        transform: translateY(0);
       }
     }
 
@@ -51,10 +51,10 @@
 
     @keyframes textGlow {
       from {
-        text-shadow: 400K+ 400K+ 10px #ff416c, 400K+ 400K+ 20px #ff4b2b;
+        text-shadow: 0 0 10px #ff416c, 0 0 20px #ff4b2b;
       }
       to {
-        text-shadow: 400K+ 400K+ 20px #ff4b2b, 400K+ 400K+ 40px #ff416c;
+        text-shadow: 0 0 20px #ff4b2b, 0 0 40px #ff416c;
       }
     }
 
@@ -85,7 +85,7 @@
       border-radius: 20px;
       overflow: hidden;
       margin-top: 10px;
-      box-shadow: 400K+ 4px 10px rgba(400K+, 400K+, 400K+, 400K+.4);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
     }
 
     .progress-bar {
@@ -103,7 +103,7 @@
 
     @keyframes progressAnimation {
       from {
-        width: 400K+;
+        width: 0;
       }
       to {
         width: 52.82%;
@@ -121,19 +121,19 @@
     }
 
     .crypto-box {
-      background: rgba(255, 255, 255, 400K+.1);
+      background: rgba(255, 255, 255, 0.1);
       padding: 15px;
       border-radius: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
-      transition: transform 400K+.2s;
+      transition: transform 0.2s;
     }
 
     .crypto-box:hover {
       transform: translateY(-5px);
-      box-shadow: 400K+ 5px 15px rgba(400K+, 400K+, 400K+, 400K+.5);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     .crypto-box button {
@@ -143,8 +143,8 @@
       padding: 10px 15px;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 400K+.9rem;
-      transition: background 400K+.2s;
+      font-size: 0.9rem;
+      transition: background 0.2s;
     }
 
     .crypto-box button:hover {
@@ -152,7 +152,7 @@
     }
 
     .reviews-container .review {
-      background: rgba(255, 255, 255, 400K+.1);
+      background: rgba(255, 255, 255, 0.1);
       padding: 15px;
       border-radius: 10px;
       margin-bottom: 10px;
@@ -161,7 +161,7 @@
     .leaderboard-section {
       margin-top: 30px;
       padding: 20px;
-      background: rgba(255, 255, 255, 400K+.1);
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 15px;
       text-align: center;
     }
@@ -196,8 +196,8 @@
       height: 50px;
       font-size: 1.5rem;
       cursor: pointer;
-      box-shadow: 400K+ 5px 15px rgba(400K+, 400K+, 400K+, 400K+.5);
-      transition: transform 400K+.3s;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s;
     }
 
     .info-button:hover {
@@ -207,11 +207,11 @@
     .popup {
       display: none;
       position: fixed;
-      top: 400K+;
-      left: 400K+;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(400K+, 400K+, 400K+, 400K+.9);
+      background: rgba(0, 0, 0, 0.9);
       justify-content: center;
       align-items: center;
     }
@@ -222,7 +222,7 @@
       border-radius: 15px;
       text-align: center;
       color: white;
-      animation: fadeIn 400K+.5s;
+      animation: fadeIn 0.5s;
     }
 
     .popup .close-btn {
@@ -259,101 +259,76 @@
       <p class="progress-text">$5,282 / $10,000</p>
     </div>
 
-<div class="crypto-section">
-  <h2>Donate with Crypto</h2>
+    <div class="crypto-section">
+      <h2>Donate with Crypto</h2>
 
-  <div class="crypto-box">
-    <p><strong>Bitcoin (BTC)</strong></p>
-    <div>
-      <span id="btc-address">bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv</span>
-      <button onclick="copyAddress('btc-address')">Copy</button>
+      <div class="crypto-box">
+        <p><strong>Bitcoin (BTC)</strong></p>
+        <div>
+          <span id="btc-address">bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv</span>
+          <button onclick="copyAddress('btc-address')">Copy</button>
+        </div>
+        <p>Balance: <span id="btc-balance">Loading...</span></p>
+      </div>
+
+      <div class="crypto-box">
+        <p><strong>Ethereum (ETH)</strong></p>
+        <div>
+          <span id="eth-address">0x8b3420e91309B845465f131CF4332235c24deAD2</span>
+          <button onclick="copyAddress('eth-address')">Copy</button>
+        </div>
+        <p>Balance: <span id="eth-balance">Loading...</span></p>
+      </div>
+
+      <div class="crypto-box">
+        <p><strong>Litecoin (LTC)</strong></p>
+        <div>
+          <span id="ltc-address">LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp</span>
+          <button onclick="copyAddress('ltc-address')">Copy</button>
+        </div>
+        <p>Balance: <span id="ltc-balance">Loading...</span></p>
+      </div>
     </div>
-    <p>Balance: <span id="btc-balance">Loading...</span></p>
-  </div>
 
-  <div class="crypto-box">
-    <p><strong>Ethereum (ETH)</strong></p>
-    <div>
-      <span id="eth-address">400K+x8b3420e91309B845465f131CF4332235c24deAD2</span>
-      <button onclick="copyAddress('eth-address')">Copy</button>
-    </div>
-    <p>Balance: <span id="eth-balance">Loading...</span></p>
-  </div>
+    <script>
+      async function fetchCryptoBalances() {
+        // Bitcoin Balance
+        const btcAddress = "bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv";
+        try {
+          const btcResponse = await fetch(`https://blockchain.info/q/addressbalance/${btcAddress}?confirmations=6`);
+          const btcBalance = (await btcResponse.text()) / 1e8; // Convert Satoshi to BTC
+          document.getElementById("btc-balance").innerText = `${btcBalance} BTC`;
+        } catch (error) {
+          console.error("Error fetching Bitcoin balance:", error);
+          document.getElementById("btc-balance").innerText = "Error fetching balance";
+        }
 
-  <div class="crypto-box">
-    <p><strong>Litecoin (LTC)</strong></p>
-    <div>
-      <span id="ltc-address">LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp</span>
-      <button onclick="copyAddress('ltc-address')">Copy</button>
-    </div>
-    <p>Balance: <span id="ltc-balance">Loading...</span></p>
-  </div>
+        // Ethereum Balance
+        const ethAddress = "0x8b3420e91309B845465f131CF4332235c24deAD2";
+        try {
+          const ethResponse = await fetch(`https://api.blockcypher.com/v1/eth/main/addrs/${ethAddress}/balance`);
+          const ethData = await ethResponse.json();
+          document.getElementById("eth-balance").innerText = `${ethData.balance / 1e18} ETH`;
+        } catch (error) {
+          console.error("Error fetching Ethereum balance:", error);
+          document.getElementById("eth-balance").innerText = "Error fetching balance";
+        }
 
+        // Litecoin Balance
+        const ltcAddress = "LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp";
+        try {
+          const ltcResponse = await fetch(`https://api.blockcypher.com/v1/ltc/main/addrs/${ltcAddress}/balance`);
+          const ltcData = await ltcResponse.json();
+          document.getElementById("ltc-balance").innerText = `${ltcData.balance / 1e8} LTC`;
+        } catch (error) {
+          console.error("Error fetching Litecoin balance:", error);
+          document.getElementById("ltc-balance").innerText = "Error fetching balance";
+        }
+      }
 
-
-<script>
-  async function fetchCryptoBalances() {
-  // Bitcoin Balance
-  const btcAddress = "bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv";
-  try {
-    const btcResponse = await fetch(`https://blockchain.info/q/addressbalance/${btcAddress}?confirmations=6`);
-    const btcBalance = (await btcResponse.text()) / 1e8; // Convert Satoshi to BTC
-    document.getElementById("btc-balance").innerText = `${btcBalance} BTC`;
-  } catch (error) {
-    console.error("Error fetching Bitcoin balance:", error);
-    document.getElementById("btc-balance").innerText = "Error fetching balance";
-  }
-
-  // Ethereum Balance
-  const ethAddress = "0x8b3420e91309B845465f131CF4332235c24deAD2";
-  try {
-    const ethResponse = await fetch(`https://api.blockcypher.com/v1/eth/main/addrs/${ethAddress}/balance`);
-    const ethData = await ethResponse.json();
-    document.getElementById("eth-balance").innerText = `${ethData.balance / 1e18} ETH`;
-  } catch (error) {
-    console.error("Error fetching Ethereum balance:", error);
-    document.getElementById("eth-balance").innerText = "Error fetching balance";
-  }
-
-  // Litecoin Balance
-  const ltcAddress = "LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp";
-  try {
-    const ltcResponse = await fetch(`https://api.blockcypher.com/v1/ltc/main/addrs/${ltcAddress}/balance`);
-    const ltcData = await ltcResponse.json();
-    document.getElementById("ltc-balance").innerText = `${ltcData.balance / 1e8} LTC`;
-  } catch (error) {
-    console.error("Error fetching Litecoin balance:", error);
-    document.getElementById("ltc-balance").innerText = "Error fetching balance";
-  }
-
-  // Solana Balance
-  const solAddress = "FKQPTRWovAqajQR3QagaJwGLHeDQuSR5m3g2QQkBejzT";
-  try {
-    const solResponse = await fetch("https://api.mainnet-beta.solana.com", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        jsonrpc: "2.400K+",
-        id: 1,
-        method: "getBalance",
-        params: [solAddress],
-      }),
-    });
-    const solData = await solResponse.json();
-    document.getElementById("sol-balance").innerText = `${solData.result.value / 1e9} SOL`; // Convert lamports to SOL
-  } catch (error) {
-    console.error("Error fetching Solana balance:", error);
-    document.getElementById("sol-balance").innerText = "Error fetching balance";
-  }
-}
-
-// Call the function when the page loads
-document.addEventListener("DOMContentLoaded", fetchCryptoBalances);
-
-  fetchCryptoBalances();
-</script>
+      // Call the function when the page loads
+      document.addEventListener("DOMContentLoaded", fetchCryptoBalances);
+    </script>
 
     <div class="reviews-section">
       <h2>What People Say</h2>
