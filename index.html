@@ -97,17 +97,8 @@
     .progress {
       height: 100%;
       background: linear-gradient(to right, #ff416c, #ff4b2b);
-      width: 52.82%;
-      animation: progressAnimation 2s ease-in-out;
-    }
-
-    @keyframes progressAnimation {
-      from {
-        width: 0;
-      }
-      to {
-        width: 52.82%;
-      }
+      width: 0;
+      transition: width 0.5s ease-in-out;
     }
 
     .progress-text {
@@ -253,7 +244,7 @@
       <h2>Donation Goal</h2>
       <div class="progress-container">
         <div class="progress-bar">
-          <div class="progress"></div>
+          <div class="progress" id="progress-bar"></div>
         </div>
       </div>
       <p class="progress-text" id="donation-text">$0 / $10,000</p>
@@ -326,23 +317,38 @@
 
   <script>
     // Load data from localStorage
-function loadData() {
-  // Donation Amount
-  const donationAmount = localStorage.getItem("donationAmount") || "0";
-  document.getElementById("donation-text").innerText = `$${donationAmount} / $10,000`;
+    function loadData() {
+      // Donation Amount
+      const donationAmount = parseDonationAmount(localStorage.getItem("donationAmount") || "0");
+      const goalAmount = 10000; // $10,000 goal
+      const progressPercentage = (donationAmount / goalAmount) * 100;
 
-  // Crypto Addresses
-  document.getElementById("btc-address").innerText = localStorage.getItem("btcAddress") || "bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv";
-  document.getElementById("eth-address").innerText = localStorage.getItem("ethAddress") || "0x8b3420e91309B845465f131CF4332235c24deAD2";
-  document.getElementById("ltc-address").innerText = localStorage.getItem("ltcAddress") || "LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp";
+      // Update progress bar width
+      const progressBar = document.getElementById("progress-bar");
+      progressBar.style.width = `${progressPercentage}%`;
 
-  // Donators
-  const donators = JSON.parse(localStorage.getItem("donators")) || [];
-  const leaderboard = document.getElementById("leaderboard-items");
-  leaderboard.innerHTML = donators
-    .map((donator, index) => `<div class="leaderboard-item"><p><strong>${index + 1}.</strong> ${donator.name} - $${donator.amount}</p></div>`)
-    .join("");
-}
+      // Update donation text
+      document.getElementById("donation-text").innerText = `$${donationAmount.toLocaleString()} / $${goalAmount.toLocaleString()}`;
+
+      // Crypto Addresses
+      document.getElementById("btc-address").innerText = localStorage.getItem("btcAddress") || "bc1qxn6sctj7tztdyjhadhxcpdql4ph99m0hjgkemv";
+      document.getElementById("eth-address").innerText = localStorage.getItem("ethAddress") || "0x8b3420e91309B845465f131CF4332235c24deAD2";
+      document.getElementById("ltc-address").innerText = localStorage.getItem("ltcAddress") || "LNWgxkswKEc5SzbbjGB1kMiwbveYm8BCcp";
+
+      // Donators
+      const donators = JSON.parse(localStorage.getItem("donators")) || [];
+      const leaderboard = document.getElementById("leaderboard-items");
+      leaderboard.innerHTML = donators
+        .map((donator, index) => `<div class="leaderboard-item"><p><strong>${index + 1}.</strong> ${donator.name} - $${donator.amount}</p></div>`)
+        .join("");
+    }
+
+    // Parse donation amount (handles commas, slashes, and currency symbols)
+    function parseDonationAmount(amount) {
+      // Remove non-numeric characters (e.g., $, commas, slashes)
+      const numericValue = amount.replace(/[^0-9.]/g, "");
+      return parseFloat(numericValue) || 0; // Convert to a number
+    }
 
     // Copy Address Function
     function copyAddress(id) {
