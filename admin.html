@@ -34,7 +34,8 @@
 
     .admin-container input,
     .admin-container textarea,
-    .admin-container button {
+    .admin-container button,
+    .admin-container select {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
@@ -113,6 +114,26 @@
         <input type="number" id="donator-amount" placeholder="Amount">
         <button onclick="addDonator()">Add Donator</button>
       </div>
+
+      <!-- Remove Donator -->
+      <div>
+        <label for="remove-donator">Select Donator to Remove:</label>
+        <select id="remove-donator">
+          <!-- Donators will be dynamically added here -->
+        </select>
+        <button onclick="removeDonator()">Remove Donator</button>
+      </div>
+
+      <!-- Update Donator Price -->
+      <div>
+        <label for="update-donator">Select Donator to Update:</label>
+        <select id="update-donator">
+          <!-- Donators will be dynamically added here -->
+        </select>
+        <label for="new-amount">New Amount ($):</label>
+        <input type="number" id="new-amount" placeholder="New Amount">
+        <button onclick="updateDonatorPrice()">Update Donator</button>
+      </div>
     </div>
   </div>
 
@@ -125,6 +146,7 @@
       if (passwordInput === PASSWORD) {
         document.getElementById("admin-controls").style.display = "block";
         document.querySelector(".password-section").style.display = "none";
+        loadDonators(); // Load donators into dropdowns
       } else {
         alert("Incorrect Password!");
       }
@@ -158,7 +180,53 @@
         donators.push(donator);
         localStorage.setItem("donators", JSON.stringify(donators));
         alert("Donator added!");
+        loadDonators(); // Refresh dropdowns
       }
+    }
+
+    // Remove Donator
+    function removeDonator() {
+      const donatorIndex = document.getElementById("remove-donator").value;
+      let donators = JSON.parse(localStorage.getItem("donators")) || [];
+      if (donatorIndex >= 0 && donatorIndex < donators.length) {
+        donators.splice(donatorIndex, 1);
+        localStorage.setItem("donators", JSON.stringify(donators));
+        alert("Donator removed!");
+        loadDonators(); // Refresh dropdowns
+      }
+    }
+
+    // Update Donator Price
+    function updateDonatorPrice() {
+      const donatorIndex = document.getElementById("update-donator").value;
+      const newAmount = document.getElementById("new-amount").value;
+      let donators = JSON.parse(localStorage.getItem("donators")) || [];
+      if (donatorIndex >= 0 && donatorIndex < donators.length && newAmount) {
+        donators[donatorIndex].amount = newAmount;
+        localStorage.setItem("donators", JSON.stringify(donators));
+        alert("Donator updated!");
+        loadDonators(); // Refresh dropdowns
+      }
+    }
+
+    // Load Donators into Dropdowns
+    function loadDonators() {
+      const donators = JSON.parse(localStorage.getItem("donators")) || [];
+      const removeDropdown = document.getElementById("remove-donator");
+      const updateDropdown = document.getElementById("update-donator");
+
+      // Clear existing options
+      removeDropdown.innerHTML = "";
+      updateDropdown.innerHTML = "";
+
+      // Add donators to dropdowns
+      donators.forEach((donator, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+        option.text = `${donator.name} - $${donator.amount}`;
+        removeDropdown.appendChild(option.cloneNode(true));
+        updateDropdown.appendChild(option);
+      });
     }
   </script>
 </body>
