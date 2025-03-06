@@ -31,9 +31,15 @@
             let prankWindow = window.open("", "", "width=400,height=200");
             prankWindow.document.write(`
                 <h1 style='text-align:center; font-size: 30px;'>You got pranked!!!</h1>
-                <audio id='prankAudio' src='beep-125033.mp3' autoplay></audio>
+                <audio id='prankAudio' src='beep-125033.mp3'></audio>
+                <script>
+                    window.onload = function() {
+                        let audio = document.getElementById('prankAudio');
+                        audio.play().catch(error => console.log('Autoplay blocked:', error));
+                    };
+                <\/script>
             `);
-            
+
             let x = 100, y = 100;
             let dx = 20, dy = 20;
             
