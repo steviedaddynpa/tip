@@ -28,21 +28,27 @@
     
     <script>
         function startPrank() {
-            let prankWindow = window.open("", "", "width=400,height=200");
-            prankWindow.document.write("<h1 style='text-align:center; font-size: 30px;'>You got pranked!!!</h1>");
-            let x = 100, y = 100;
-            let dx = 20, dy = 20;
+            let numWindows = 5;
+            let prankWindows = [];
             
-            function moveWindow() {
-                if (prankWindow.closed) return;
-                x += dx;
-                y += dy;
-                if (x <= 0 || x >= screen.width - 400) dx = -dx;
-                if (y <= 0 || y >= screen.height - 200) dy = -dy;
-                prankWindow.moveTo(x, y);
-                setTimeout(moveWindow, 30);
+            for (let i = 0; i < numWindows; i++) {
+                let prankWindow = window.open("", "", "width=400,height=200");
+                prankWindow.document.write("<h1 style='text-align:center; font-size: 30px;'>You got pranked!!!</h1>");
+                prankWindows.push({ window: prankWindow, x: Math.random() * screen.width, y: Math.random() * screen.height, dx: (Math.random() * 20) + 10, dy: (Math.random() * 20) + 10 });
             }
-            moveWindow();
+            
+            function moveWindows() {
+                prankWindows.forEach(prank => {
+                    if (prank.window.closed) return;
+                    prank.x += prank.dx;
+                    prank.y += prank.dy;
+                    if (prank.x <= 0 || prank.x >= screen.width - 400) prank.dx = -prank.dx;
+                    if (prank.y <= 0 || prank.y >= screen.height - 200) prank.dy = -prank.dy;
+                    prank.window.moveTo(prank.x, prank.y);
+                });
+                setTimeout(moveWindows, 30);
+            }
+            moveWindows();
         }
     </script>
 </body>
