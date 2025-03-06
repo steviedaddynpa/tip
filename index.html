@@ -13,8 +13,8 @@
             background-color: #f4f4f4;
         }
         button {
-            font-size: 20px;
-            padding: 15px;
+            font-size: 24px;
+            padding: 20px;
             cursor: pointer;
             background-color: red;
             color: white;
@@ -28,19 +28,19 @@
     
     <script>
         function startPrank() {
-            let prankWindow = window.open("", "", "width=200,height=100");
-            prankWindow.document.write("<h1 style='text-align:center;'>You got pranked!!!</h1>");
+            let prankWindow = window.open("", "", "width=400,height=200");
+            prankWindow.document.write("<h1 style='text-align:center; font-size: 30px;'>You got pranked!!!</h1>");
             let x = 100, y = 100;
-            let dx = 10, dy = 10;
+            let dx = 20, dy = 20;
             
             function moveWindow() {
                 if (prankWindow.closed) return;
                 x += dx;
                 y += dy;
-                if (x <= 0 || x >= screen.width - 200) dx = -dx;
-                if (y <= 0 || y >= screen.height - 100) dy = -dy;
+                if (x <= 0 || x >= screen.width - 400) dx = -dx;
+                if (y <= 0 || y >= screen.height - 200) dy = -dy;
                 prankWindow.moveTo(x, y);
-                setTimeout(moveWindow, 50);
+                setTimeout(moveWindow, 30);
             }
             moveWindow();
         }
