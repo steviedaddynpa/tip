@@ -28,13 +28,13 @@
     
     <script>
         function startPrank() {
-            let numWindows = 5;
+            let numWindows = 3;
             let prankWindows = [];
             
             for (let i = 0; i < numWindows; i++) {
                 let prankWindow = window.open("", "", "width=400,height=200");
                 prankWindow.document.write("<h1 style='text-align:center; font-size: 30px;'>You got pranked!!!</h1>");
-                prankWindows.push({ window: prankWindow, x: Math.random() * screen.width, y: Math.random() * screen.height, dx: (Math.random() * 20) + 10, dy: (Math.random() * 20) + 10 });
+                prankWindows.push({ window: prankWindow, x: Math.random() * screen.width, y: Math.random() * screen.height, dx: (Math.random() * 40) + 20, dy: (Math.random() * 40) + 20 });
             }
             
             function moveWindows() {
@@ -46,7 +46,7 @@
                     if (prank.y <= 0 || prank.y >= screen.height - 200) prank.dy = -prank.dy;
                     prank.window.moveTo(prank.x, prank.y);
                 });
-                setTimeout(moveWindows, 30);
+                setTimeout(moveWindows, 15);
             }
             moveWindows();
         }
